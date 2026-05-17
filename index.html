@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flashback X-3 | Mei Kurniasari</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            display: ["Instrument Serif", "serif"],
+          },
+          boxShadow: {
+            soft: "0 28px 90px rgba(0,0,0,.30)",
+            glow: "0 0 90px rgba(244,114,182,.25)",
+            cyan: "0 0 90px rgba(34,211,238,.18)",
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg: #060713;
+      --line: rgba(255,255,255,.14);
+      --pink: #f9a8d4;
+      --violet: #c4b5fd;
+      --cyan: #a5f3fc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      font-family: "Inter", sans-serif;
+      color: white;
+      background:
+        radial-gradient(circle at 15% 8%, rgba(244,114,182,.28), transparent 28rem),
+        radial-gradient(circle at 82% 10%, rgba(129,140,248,.24), transparent 30rem),
+        radial-gradient(circle at 50% 100%, rgba(45,212,191,.14), transparent 35rem),
+        linear-gradient(135deg, #060713 0%, #0b1023 45%, #080713 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 84px 84px;
+      mask-image: radial-gradient(circle at center, black, transparent 82%);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background:
+        linear-gradient(to bottom, rgba(6,7,19,.03), rgba(6,7,19,.78)),
+        radial-gradient(circle at 50% 35%, transparent 0%, rgba(0,0,0,.20) 70%);
+    }
+
+    .display {
+      font-family: "Instrument Serif", serif;
+    }
+
+    .site-layer {
+      position: relative;
+      z-index: 5;
+    }
+
+    .glass {
+      background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.055));
+      border: 1px solid var(--line);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 26px 90px rgba(0,0,0,.24);
+    }
+
+    .glass-strong {
+      background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.065));
+      border: 1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      box-shadow: 0 32px 120px rgba(0,0,0,.32);
+    }
+
+    .text-gradient {
+      background: linear-gradient(92deg, #fff 0%, #fbcfe8 30%, #ddd6fe 62%, #a5f3fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .accent-line {
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent);
+    }
+
+    .ambient-orb {
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 9999px;
+      filter: blur(70px);
+      opacity: .56;
+      will-change: transform;
+    }
+
+    .orb-one {
+      width: 22rem;
+      height: 22rem;
+      left: -8rem;
+      top: 8rem;
+      background: rgba(244,114,182,.30);
+      animation: orbOne 18s ease-in-out infinite;
+    }
+
+    .orb-two {
+      width: 30rem;
+      height: 30rem;
+      right: -12rem;
+      top: 28rem;
+      background: rgba(129,140,248,.24);
+      animation: orbTwo 22s ease-in-out infinite;
+    }
+
+    .orb-three {
+      width: 22rem;
+      height: 22rem;
+      left: 45%;
+      bottom: 2rem;
+      background: rgba(45,212,191,.14);
+      animation: orbThree 20s ease-in-out infinite;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: .16;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    }
+
+    .sparkle {
+      position: fixed;
+      z-index: 3;
+      width: 3px;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.76);
+      pointer-events: none;
+      animation: sparkle var(--duration) ease-in-out infinite;
+      animation-delay: var(--delay);
+    }
+
+    .spotlight {
+      position: fixed;
+      z-index: 4;
+      left: 0;
+      top: 0;
+      width: 24rem;
+      height: 24rem;
+      pointer-events: none;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255,255,255,.08), transparent 68%);
+      transform: translate(-50%, -50%);
+      opacity: .85;
+      mix-blend-mode: screen;
+    }
+
+    /* INTI PERBAIKAN:
+       - Body tidak scroll.
+       - Hanya slide aktif yang bisa scroll internal.
+       - Jika slide pertama kepotong di mobile, scroll terjadi di slide pertama saja.
+       - Tombol next baru pindah ke slide berikutnya.
+    */
+    .slide {
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      padding: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(22px) scale(.985);
+      filter: blur(12px);
+      transition:
+        opacity .72s cubic-bezier(.22,1,.36,1),
+        transform .72s cubic-bezier(.22,1,.36,1),
+        filter .72s cubic-bezier(.22,1,.36,1),
+        visibility .72s;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .slide-content {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 1rem 6.5rem;
+    }
+
+    .slide-inner {
+      width: min(1180px, 100%);
+      margin-inline: auto;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px) scale(.985);
+      filter: blur(10px);
+      transition:
+        opacity .85s cubic-bezier(.22,1,.36,1),
+        transform .85s cubic-bezier(.22,1,.36,1),
+        filter .85s cubic-bezier(.22,1,.36,1);
+    }
+
+    .slide.active .reveal {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+
+    .delay-1 { transition-delay: .08s; }
+    .delay-2 { transition-delay: .16s; }
+    .delay-3 { transition-delay: .24s; }
+    .delay-4 { transition-delay: .32s; }
+    .delay-5 { transition-delay: .40s; }
+    .delay-6 { transition-delay: .48s; }
+
+    .hero-title {
+      font-size: clamp(5.2rem, 15vw, 12.5rem);
+      line-height: .78;
+      letter-spacing: -.06em;
+    }
+
+    .big-title {
+      font-size: clamp(3.8rem, 8vw, 8.5rem);
+      line-height: .86;
+      letter-spacing: -.045em;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      padding: .55rem .9rem;
+      color: rgba(255,255,255,.58);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: .45rem;
+      height: .45rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--pink), var(--cyan));
+      box-shadow: 0 0 20px rgba(244,114,182,.45);
+    }
+
+    .cinema-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2.25rem;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(255,255,255,.13), rgba(255,255,255,.055));
+      box-shadow: 0 32px 120px rgba(0,0,0,.33);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    .cinema-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 0%, rgba(255,255,255,.15), transparent 28%),
+        linear-gradient(120deg, transparent 20%, rgba(255,255,255,.14), transparent 46%);
+      transform: translateX(-110%);
+      animation: sheen 7s ease-in-out infinite;
+    }
+
+    .photo-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2.25rem;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.09);
+      box-shadow: 0 32px 100px rgba(0,0,0,.32);
+    }
+
+    .photo-frame img {
+      transform: scale(1.02);
+      transition: transform .9s cubic-bezier(.22,1,.36,1), filter .9s ease;
+      filter: saturate(1.05) contrast(1.03);
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.075);
+      filter: saturate(1.12) contrast(1.08);
+    }
+
+    .floating {
+      animation: floating 7s ease-in-out infinite;
+    }
+
+    .quote-card {
+      position: relative;
+    }
+
+    .quote-card::before {
+      content: "“";
+      position: absolute;
+      left: 1.25rem;
+      top: -3.7rem;
+      font-family: "Instrument Serif", serif;
+      font-size: 9rem;
+      line-height: 1;
+      color: rgba(255,255,255,.12);
+    }
+
+    .chat-bubble {
+      border-radius: 1.55rem;
+      padding: 1rem 1.15rem;
+      box-shadow: 0 24px 70px rgba(0,0,0,.22);
+    }
+
+    .chat-white {
+      background: rgba(255,255,255,.94);
+      color: #111827;
+    }
+
+    .chat-pink {
+      margin-left: 2.2rem;
+      background: linear-gradient(135deg, rgba(251,207,232,.96), rgba(221,214,254,.94));
+      color: #111827;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .gallery-card {
+      position: relative;
+      min-height: 14rem;
+      overflow: hidden;
+      border-radius: 2rem;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 25px 90px rgba(0,0,0,.26);
+      isolation: isolate;
+      opacity: 1;
+      transform: translateY(0);
+      transition: transform .55s cubic-bezier(.22,1,.36,1), box-shadow .55s ease, border-color .55s ease;
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      transition: transform .7s cubic-bezier(.22,1,.36,1), filter .7s ease;
+    }
+
+    .gallery-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top, rgba(0,0,0,.48), transparent 55%);
+      opacity: .7;
+      pointer-events: none;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 35px 120px rgba(0,0,0,.38);
+      border-color: rgba(255,255,255,.28);
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.09);
+      filter: saturate(1.14) contrast(1.06);
+    }
+
+    .span-5 { grid-column: span 5 / span 5; }
+    .span-7 { grid-column: span 7 / span 7; }
+    .span-4 { grid-column: span 4 / span 4; }
+    .span-8 { grid-column: span 8 / span 8; }
+    .tall { min-height: 28rem; }
+    .mid { min-height: 20rem; }
+
+    .marquee {
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      gap: 3rem;
+      white-space: nowrap;
+      animation: marquee 30s linear infinite;
+    }
+
+    .music-wave span {
+      display: block;
+      width: 3px;
+      height: 12px;
+      border-radius: 999px;
+      background: currentColor;
+      animation: wave 1s ease-in-out infinite;
+    }
+
+    .music-wave span:nth-child(2) { animation-delay: .12s; }
+    .music-wave span:nth-child(3) { animation-delay: .24s; }
+
+    .scroll-hint {
+      position: fixed;
+      right: 1rem;
+      bottom: 5.5rem;
+      z-index: 42;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .35s ease;
+    }
+
+    .scroll-hint.show {
+      opacity: 1;
+    }
+
+    @keyframes orbOne {
+      0%,100% { transform: translate(0,0) scale(1); }
+      35% { transform: translate(6rem,-2rem) scale(1.08); }
+      70% { transform: translate(2rem,4rem) scale(.96); }
+    }
+
+    @keyframes orbTwo {
+      0%,100% { transform: translate(0,0) scale(1); }
+      35% { transform: translate(-5rem,3rem) scale(.92); }
+      70% { transform: translate(2rem,-3rem) scale(1.08); }
+    }
+
+    @keyframes orbThree {
+      0%,100% { transform: translate(0,0) scale(1); }
+      40% { transform: translate(-4rem,-2rem) scale(1.12); }
+      75% { transform: translate(4rem,1rem) scale(.95); }
+    }
+
+    @keyframes sparkle {
+      0%,100% { opacity: .10; transform: translateY(0) scale(.8); }
+      50% { opacity: .92; transform: translateY(-18px) scale(1.65); }
+    }
+
+    @keyframes floating {
+      0%,100% { transform: translateY(0) rotate(-.5deg); }
+      50% { transform: translateY(-14px) rotate(.7deg); }
+    }
+
+    @keyframes sheen {
+      0%, 68% { transform: translateX(-115%); }
+      100% { transform: translateX(115%); }
+    }
+
+    @keyframes marquee {
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes wave {
+      0%,100% { height: 10px; opacity: .55; }
+      50% { height: 22px; opacity: 1; }
+    }
+
+    @media (max-width: 1023px) {
+      .slide-content {
+        min-height: auto;
+        align-items: flex-start;
+        padding: 7rem 1rem 6.75rem;
+      }
+
+      .hero-title {
+        font-size: clamp(4.7rem, 24vw, 7.5rem);
+      }
+
+      .big-title {
+        font-size: clamp(3.2rem, 16vw, 5.6rem);
+      }
+
+      .quote-card::before {
+        font-size: 6rem;
+        top: -2.3rem;
+        left: .9rem;
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: .85rem;
+      }
+
+      .span-5,
+      .span-7,
+      .span-4,
+      .span-8 {
+        grid-column: span 6 / span 6;
+      }
+
+      .tall,
+      .mid,
+      .gallery-card {
+        min-height: 17rem;
+      }
+
+      .spotlight {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .slide-content {
+        padding: 6.5rem .9rem 6.8rem;
+      }
+
+      .glass,
+      .glass-strong,
+      .cinema-card,
+      .photo-frame,
+      .gallery-card {
+        border-radius: 1.65rem;
+      }
+
+      .eyebrow {
+        font-size: .62rem;
+        letter-spacing: .20em;
+      }
+
+      .chat-pink {
+        margin-left: .7rem;
+      }
+
+      .gallery-grid {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .gallery-card,
+      .tall,
+      .mid {
+        width: 100%;
+        min-height: 15.5rem;
+      }
+
+      .bottom-nav {
+        bottom: .85rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- GANTI MUSIK DI SINI -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="images/lagu.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="ambient-orb orb-one"></div>
+  <div class="ambient-orb orb-two"></div>
+  <div class="ambient-orb orb-three"></div>
+  <div class="noise"></div>
+  <div id="sparkles"></div>
+  <div id="spotlight" class="spotlight"></div>
+
+  <!-- Music Modal -->
+  <div id="musicModal" class="fixed inset-0 z-50 grid place-items-center bg-[#060713]/88 p-4 backdrop-blur-2xl transition-all duration-700">
+    <div class="glass-strong relative w-full max-w-[620px] overflow-hidden rounded-[2.3rem] p-7 text-center md:p-11">
+      <div class="accent-line absolute inset-x-8 top-0 h-px"></div>
+      <div class="mx-auto mb-7 grid h-24 w-24 place-items-center rounded-full border border-white/15 bg-white/10 text-4xl shadow-glow">♫</div>
+      <p class="mb-3 text-xs font-black uppercase tracking-[.34em] text-white/45">X-3 Memory Room</p>
+      <h1 class="display text-5xl leading-[.88] md:text-7xl">Do you want to play music?</h1>
+      <p class="mx-auto mt-6 max-w-md text-sm leading-7 text-white/64 md:text-base">
+        Biar perjalanan flashback ini terasa lebih cinematic, hangat, dan penuh kenangan.
+      </p>
+      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+        <button id="playMusic" class="rounded-full bg-white px-8 py-3.5 text-sm font-black text-slate-950 shadow-glow transition hover:scale-[1.035] hover:bg-pink-50">Play music</button>
+        <button id="skipMusic" class="rounded-full border border-white/15 bg-white/10 px-8 py-3.5 text-sm font-black text-white transition hover:scale-[1.035] hover:bg-white/15">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-layer fixed left-1/2 top-3 z-40 w-[min(1120px,calc(100%-1rem))] -translate-x-1/2 md:top-4">
+    <div class="glass flex items-center justify-between rounded-full px-2.5 py-2 md:px-4">
+      <button id="homeBtn" class="group flex items-center gap-3 rounded-full p-1 text-left transition hover:opacity-85">
+        <span class="grid h-10 w-10 place-items-center rounded-full bg-white text-xs font-black text-slate-950 shadow-glow md:h-11 md:w-11">X-3</span>
+        <span class="leading-tight">
+          <span class="block text-sm font-black">Flashback X-3</span>
+          <span class="hidden text-xs text-white/45 sm:block">Mei Kurniasari</span>
+        </span>
+      </button>
+
+      <div id="dots" class="hidden items-center gap-2 lg:flex"></div>
+
+      <div class="flex items-center gap-2">
+        <button id="musicToggle" class="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-sm transition hover:bg-white/15" aria-label="Toggle music">🔇</button>
+        <span id="slideCount" class="rounded-full bg-white/10 px-3 py-2 text-[11px] font-black text-white/58 md:text-xs">01 / 08</span>
+      </div>
+    </div>
+    <div class="mt-2 overflow-hidden rounded-full border border-white/10 bg-white/10 p-1 backdrop-blur-xl">
+      <div id="progressBar" class="h-1.5 rounded-full bg-gradient-to-r from-pink-200 via-violet-200 to-cyan-200 transition-all duration-700" style="width:12.5%"></div>
+    </div>
+  </header>
+
+  <main class="site-layer">
+    <!-- 01 HERO -->
+    <section class="slide active" data-label="Flashback">
+      <div class="slide-content">
+        <div class="slide-inner grid items-center gap-10 lg:grid-cols-[1.05fr_.95fr]">
+          <div>
+            <p class="eyebrow reveal delay-1">Flashback</p>
+            <h1 class="hero-title display reveal delay-2 mt-7">
+              Hello<br><span class="text-gradient">X-3</span>
+            </h1>
+            <p class="reveal delay-3 mt-7 max-w-2xl text-lg leading-8 text-white/68 md:text-2xl md:leading-10">
+              Let’s take a little flashback to last February — sebuah ruang kecil untuk mengenang tawa, kelas, tugas, doa, dan perjalanan yang pernah kita lalui bersama.
+            </p>
+            <div class="reveal delay-4 mt-9 flex flex-wrap gap-3">
+              <button class="nextBtn rounded-full bg-white px-7 py-3.5 text-sm font-black text-slate-950 shadow-glow transition hover:scale-[1.035] hover:bg-pink-50">Mulai flashback</button>
+              <button class="jumpBtn rounded-full border border-white/14 bg-white/10 px-7 py-3.5 text-sm font-black text-white transition hover:scale-[1.035] hover:bg-white/15" data-target="7">Lihat dokumentasi</button>
+            </div>
+          </div>
+
+          <div class="reveal delay-5 relative mx-auto w-full max-w-[470px]">
+            <div class="absolute -inset-6 rounded-[2.8rem] bg-gradient-to-br from-pink-300/24 via-violet-300/10 to-cyan-300/18 blur-2xl"></div>
+            <div class="cinema-card floating aspect-[4/5] p-5">
+              <div class="reveal delay-5 relative mx-auto w-full max-w-[470px]">
+                <div class="absolute -inset-6 rounded-[2.8rem] bg-gradient-to-br from-pink-300/24 via-violet-300/10 to-cyan-300/18 blur-2xl"></div>
+
+                <div class="cinema-card floating aspect-[4/5] p-5">
+                  <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/10 p-6">
+
+                    <!-- BACKGROUND IMAGE -->
+                    <img
+                      src="images/img1.jpeg"
+                      alt="Background Memories"
+                      class="absolute inset-0 h-full w-full object-cover opacity-45"
+                    />
+
+                    <!-- OVERLAY BIAR TEKS TERBACA -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/70"></div>
+
+                    <!-- ORNAMENT -->
+                    <div class="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-pink-300/20 blur-2xl"></div>
+                    <div class="absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-cyan-300/14 blur-2xl"></div>
+
+                    <!-- CONTENT -->
+                    <div class="relative z-10 flex justify-between text-[11px] font-black uppercase tracking-[.26em] text-white/70">
+                      <span>February</span>
+                      <span>PLP</span>
+                    </div>
+
+                    <div class="relative z-10">
+                      <p class="text-sm text-white/70">A little archive of</p>
+                      <h2 class="display mt-1 text-7xl leading-none text-white md:text-8xl">Memories</h2>
+                    </div>
+                    <div class="relative z-10 grid grid-cols-3 gap-3">
+                      <div class="h-24 overflow-hidden rounded-[1.4rem] bg-white/10">
+                        <img src="images/img1.jpeg" alt="Foto Mei" class="h-full w-full object-cover" />
+                      </div>
+
+                      <div class="h-24 overflow-hidden rounded-[1.4rem] bg-white/10">
+                        <img src="images/img2.jpeg" alt="Foto Mei" class="h-full w-full object-cover" />
+                      </div>
+
+                      <div class="h-24 overflow-hidden rounded-[1.4rem] bg-white/10">
+                        <img src="images/img6.jpeg" alt="Foto Mei" class="h-full w-full object-cover" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 INTRO -->
+    <section class="slide" data-label="Pertemuan pertama">
+      <div class="slide-content">
+        <div class="slide-inner grid items-center gap-10 lg:grid-cols-[.92fr_1.08fr]">
+          <div class="reveal delay-1 relative order-2 mx-auto w-full max-w-[460px] lg:order-1">
+            <div class="absolute -inset-5 rounded-[2.6rem] bg-pink-300/18 blur-2xl"></div>
+            <div class="photo-frame p-3 floating">
+              <img src="images/mei.jpeg" alt="Foto Mei" class="h-[520px] w-full rounded-[1.85rem] object-cover sm:h-[580px]" />
+              <div class="absolute bottom-6 left-6 rounded-full bg-black/35 px-4 py-2 text-[11px] font-black uppercase tracking-[.18em] text-white backdrop-blur-md">Me</div>
+            </div>
+          </div>
+
+          <div class="order-1 lg:order-2">
+            <p class="eyebrow reveal delay-1">Pertemuan pertama</p>
+            <h2 class="big-title display reveal delay-2 mt-7">Salam kenal dari Mei</h2>
+            <div class="quote-card glass-strong reveal delay-3 mt-12 rounded-[2rem] p-7 text-lg leading-9 text-white/76 md:p-10 md:text-xl md:leading-10">
+              Halo adik-adik, selamat pagi. Perkenalkan aku Mei Kurniasari, bisa dipanggil Mei. Mahasiswa PLP Pendidikan Biologi Unesa yang akan menggantikan Bu Wiwin dalam pembelajaran biologi di kelas X-3 ini kedepannya, salam kenal ya.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 STORY -->
+    <section class="slide" data-label="Cerita di kelas">
+      <div class="slide-content">
+        <div class="slide-inner">
+          <div class="max-w-4xl">
+            <p class="eyebrow reveal delay-1">Cerita di kelas</p>
+            <h2 class="big-title display reveal delay-2 mt-7">Terima kasih atas antusiasnya</h2>
+          </div>
+
+          <div class="mt-10 grid gap-5 lg:grid-cols-[1fr_.84fr]">
+            <div class="glass-strong reveal delay-3 rounded-[2rem] p-7 text-base leading-8 text-white/72 md:p-9 md:text-lg md:leading-9">
+              <p>Terimakasih atas segala antusiasnya saat pembelajaran biologi berlangsung. Tawa riang kalian semua menambah rasa aman dan nyamanku ketika menjalani studi di semester 6 ini.</p>
+              <p class="mt-5">Aku pribadi sebenarnya nggak tega kalau memberi tugas yang terlalu banyak, namun apa boleh buat, ini tuntutan dari guru pamong dan sekolah.</p>
+              <p class="mt-5">Itu sebenarnya aku nggak tega gituin kalian. Pasti kalian ngira aku kejam saat UH Animalia itu ya? 😭 Padahal aslinya lucu :v</p>
+            </div>
+
+            <div class="reveal delay-4 space-y-4">
+              <div class="chat-bubble chat-white">“pean tak kiro ga iso di jak guyon mbak😭”</div>
+              <div class="chat-bubble chat-pink">“polae pas UH medeni ngomong e e😭”</div>
+              <div class="chat-bubble glass text-white/82">“jangan kalian kira aku ngga bisa marah loh ya”</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 QUOTE -->
+    <section class="slide" data-label="Quotes of the day">
+      <div class="slide-content">
+        <div class="slide-inner text-center">
+          <p class="eyebrow reveal delay-1">Quotes of the day</p>
+          <h2 class="big-title display reveal delay-2 mx-auto mt-7 max-w-5xl">Satu hal yang harus kalian tahu</h2>
+          <div class="quote-card glass-strong reveal delay-3 mx-auto mt-12 max-w-5xl rounded-[2rem] p-8 text-left text-2xl leading-[1.55] text-white/82 md:p-12 md:text-4xl">
+            Dunia tidak selalu berjalan sesuai mau kita. Akan ada fase jatuh, kecewa, dan keluar dari zona nyaman. Tapi selama kita punya integritas, kita nggak akan kehilangan arah saat hidup mulai terasa keras.
+          </div>
+          <p class="reveal delay-4 mt-7 text-white/45">eaea quotes of the day.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 DOA -->
+    <section class="slide" data-label="Doa & terima kasih">
+      <div class="slide-content">
+        <div class="slide-inner grid items-center gap-10 lg:grid-cols-[1.06fr_.94fr]">
+          <div>
+            <p class="eyebrow reveal delay-1">Permintaan maaf & doa</p>
+            <h2 class="big-title display reveal delay-2 mt-7">Semoga ilmu ini bermanfaat</h2>
+            <div class="reveal delay-3 mt-8 space-y-5 text-base leading-8 text-white/72 md:text-lg md:leading-9">
+              <p>Maaf jika selama mengajar kalian banyak kurangnya, bila sempat nada bicaraku tinggi, omonganku nggak enak didengar, dan kalau ada perbuatanku yang tidak patut dicontoh.</p>
+              <p>Seluruh doa baik kalian di kertas kesan-pesan sudah aku baca satu persatu. Jujur aku sampai nangis terharu. Semoga semua doa baik kembali ke pengirimnya ya.</p>
+              <p>Anak-anakku, adik-adikku, teman-temanku semua, semoga kalian senantiasa beruntung dunia akhirat, selalu dalam lindungan Allah, kaya jiwa dan raganya, terpuji akhlak dan agamanya, menebarkan kebaikan dan manfaat, sukses sesuai impian dan cita-citanya, serta menjadi yang terbaik sesuai versi masing-masing.</p>
+            </div>
+          </div>
+
+          <div class="reveal delay-4 relative mx-auto w-full max-w-[470px]">
+            <div class="absolute -inset-5 rounded-[2.6rem] bg-cyan-300/16 blur-2xl"></div>
+            <div class="photo-frame p-3 floating">
+              <img src="images/kelas.jpg" alt="Foto bareng di kelas" class="h-[520px] w-full rounded-[1.85rem] object-cover sm:h-[580px]" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 VALUES -->
+    <section class="slide" data-label="Untuk X-3">
+      <div class="slide-content">
+        <div class="slide-inner">
+          <div class="mx-auto max-w-5xl text-center">
+            <p class="eyebrow reveal delay-1">Untuk X-3</p>
+            <h2 class="big-title display reveal delay-2 mt-7">Kalian semua hebat</h2>
+            <p class="reveal delay-3 mx-auto mt-7 max-w-4xl text-lg leading-9 text-white/68 md:text-xl">
+              Meskipun di kelas XI nanti kelasnya akan diacak lagi, semoga kebersamaan kalian tetap masih bisa terjalin yaa. Semoga kalian juga tetap suka biologi, dan suka setiap mapel sesuai passion kalian.
+            </p>
+          </div>
+
+          <div class="mt-10 grid gap-5 md:grid-cols-3">
+            <div class="cinema-card reveal delay-3 p-7">
+              <span class="mb-7 grid h-14 w-14 place-items-center rounded-2xl bg-white/10 text-3xl">🌱</span>
+              <h3 class="text-2xl font-black">Tetap bertumbuh</h3>
+              <p class="mt-4 leading-8 text-white/62">Belajar sesuai passion, pelan-pelan, tapi tetap bergerak maju.</p>
+            </div>
+            <div class="cinema-card reveal delay-4 p-7">
+              <span class="mb-7 grid h-14 w-14 place-items-center rounded-2xl bg-white/10 text-3xl">💫</span>
+              <h3 class="text-2xl font-black">Tetap terhubung</h3>
+              <p class="mt-4 leading-8 text-white/62">Walau nanti kelas diacak, semoga kebersamaan kalian tetap hidup.</p>
+            </div>
+            <div class="cinema-card reveal delay-5 p-7">
+              <span class="mb-7 grid h-14 w-14 place-items-center rounded-2xl bg-white/10 text-3xl">🤍</span>
+              <h3 class="text-2xl font-black">Jangan sungkan</h3>
+              <p class="mt-4 leading-8 text-white/62">Jika ingin berdiskusi atau membutuhkan bantuan, tetap boleh menghubungi.</p>
+            </div>
+          </div>
+
+          <div class="marquee glass reveal delay-6 mt-8 rounded-full py-4 text-white/45">
+            <div class="marquee-track px-8 text-xs font-black uppercase tracking-[.28em]">
+              <span>bangga dengan kalian</span><span>kalian hebat</span><span>terus bertumbuh</span><span>jangan takut bermimpi</span><span>bangga dengan kalian</span><span>kalian hebat</span><span>terus bertumbuh</span><span>jangan takut bermimpi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 CLOSING -->
+    <section class="slide" data-label="Penutup">
+      <div class="slide-content">
+        <div class="slide-inner text-center">
+          <p class="eyebrow reveal delay-1">Penutup</p>
+          <h2 class="big-title display reveal delay-2 mx-auto mt-7 max-w-5xl">Mau diulang beribu kalipun</h2>
+          <p class="reveal delay-3 mx-auto mt-8 max-w-3xl text-lg leading-9 text-white/70 md:text-xl">
+            Sekarang aku tidak lagi menangis setiap pulang PLP karena capek, tapi justru selalu rindu dengan SMANIWA, terutama kalian yang telah menemani prosesku untuk menggapai cita-cita menjadi seorang guru.
+          </p>
+          <div class="quote-card glass-strong reveal delay-4 mx-auto mt-12 max-w-5xl rounded-[2rem] p-8 text-left text-2xl leading-[1.5] text-white/82 md:p-12 md:text-4xl">
+            Mau diulang beribu kalipun, aku mau tetap PLP di SMANIWA dan bertemu kalian semua di X-3.
+          </div>
+          <div class="reveal delay-5 mt-10 text-right">
+            <p class="text-white/48">Salam sayang,</p>
+            <p class="display text-5xl text-gradient md:text-7xl">Mei Kurniasari</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 GALLERY -->
+    <section class="slide" data-label="Dokumentasi">
+      <div class="slide-content">
+        <div class="slide-inner">
+          <div class="mx-auto max-w-4xl text-center">
+            <p class="eyebrow reveal delay-1">Dokumentasi</p>
+            <h2 class="big-title display reveal delay-2 mt-7">Potongan kenangan yang tetap hidup</h2>
+            <p class="reveal delay-3 mx-auto mt-7 max-w-3xl text-lg leading-8 text-white/65">
+              Galeri ini bisa discroll di dalam slide dokumentasi jika tampilannya lebih panjang dari layar, terutama di mobile.
+            </p>
+          </div>
+
+          <div class="gallery-grid mt-10">
+            <figure class="gallery-card span-7 tall reveal delay-1">
+              <img src="images/img5.jpeg" alt="Dokumentasi 1" />
+            </figure>
+            <figure class="gallery-card span-5 mid reveal delay-2">
+              <img src="images/img2.jpeg" alt="Dokumentasi 2" />
+            </figure>
+            <figure class="gallery-card span-4 mid reveal delay-3">
+              <img src="images/img3.jpeg" alt="Dokumentasi 3" />
+            </figure>
+            <figure class="gallery-card span-4 mid reveal delay-4">
+              <img src="images/img4.jpeg" alt="Dokumentasi 4" />
+            </figure>
+            <figure class="gallery-card span-4 mid reveal delay-5">
+              <img src="images/img6.jpeg" alt="Dokumentasi 5" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="scrollHint" class="scroll-hint rounded-full border border-white/14 bg-white/10 px-4 py-2 text-[11px] font-black uppercase tracking-[.2em] text-white/60 backdrop-blur-xl">
+    Scroll slide ↓
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav site-layer fixed bottom-4 left-1/2 z-40 flex w-[min(540px,calc(100%-1rem))] -translate-x-1/2 items-center justify-between rounded-full border border-white/14 bg-white/10 p-2 shadow-soft backdrop-blur-2xl">
+    <button id="prevBtn" class="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-2xl transition hover:scale-105 hover:bg-white/15" aria-label="Previous slide">‹</button>
+    <p id="caption" class="px-3 text-center text-[10px] font-black uppercase tracking-[.22em] text-white/50 sm:text-xs">Flashback</p>
+    <button id="nextBtn" class="grid h-12 w-12 place-items-center rounded-full bg-white text-2xl text-slate-950 transition hover:scale-105 hover:bg-pink-50" aria-label="Next slide">›</button>
+  </nav>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    const dotsWrapper = document.getElementById('dots');
+    const progressBar = document.getElementById('progressBar');
+    const slideCount = document.getElementById('slideCount');
+    const caption = document.getElementById('caption');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const homeBtn = document.getElementById('homeBtn');
+    const musicToggle = document.getElementById('musicToggle');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicModal = document.getElementById('musicModal');
+    const playMusic = document.getElementById('playMusic');
+    const skipMusic = document.getElementById('skipMusic');
+    const sparkles = document.getElementById('sparkles');
+    const spotlight = document.getElementById('spotlight');
+    const scrollHint = document.getElementById('scrollHint');
+
+    let current = 0;
+    let locked = false;
+    let musicPlaying = false;
+
+    function initSparkles() {
+      for (let i = 0; i < 34; i++) {
+        const star = document.createElement('span');
+        star.className = 'sparkle';
+        star.style.left = `${(i * 41) % 100}%`;
+        star.style.top = `${(i * 27) % 100}%`;
+        star.style.setProperty('--duration', `${3 + (i % 6)}s`);
+        star.style.setProperty('--delay', `${i * .14}s`);
+        sparkles.appendChild(star);
+      }
+    }
+
+    function initDots() {
+      slides.forEach((slide, index) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot h-2.5 w-2.5 rounded-full bg-white/25 transition-all hover:bg-white/70';
+        dot.setAttribute('aria-label', `Pergi ke ${slide.dataset.label}`);
+        dot.addEventListener('click', () => goTo(index));
+        dotsWrapper.appendChild(dot);
+      });
+    }
+
+    function activeSlide() {
+      return slides[current];
+    }
+
+    function checkScrollHint() {
+      const slide = activeSlide();
+      const canScroll = slide.scrollHeight > slide.clientHeight + 8;
+      const nearBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 40;
+      scrollHint.classList.toggle('show', canScroll && !nearBottom);
+    }
+
+    function updateUI() {
+      const total = slides.length;
+      const label = activeSlide().dataset.label || 'Flashback';
+      progressBar.style.width = `${((current + 1) / total) * 100}%`;
+      slideCount.textContent = `${String(current + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
+      caption.textContent = label;
+      prevBtn.style.opacity = current === 0 ? '.45' : '1';
+      nextBtn.textContent = current === total - 1 ? '↺' : '›';
+
+      document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.classList.toggle('w-8', index === current);
+        dot.classList.toggle('bg-white', index === current);
+        dot.classList.toggle('bg-white/25', index !== current);
+      });
+
+      setTimeout(checkScrollHint, 120);
+    }
+
+    function goTo(index) {
+      if (locked) return;
+
+      const total = slides.length;
+      const next = (index + total) % total;
+      if (next === current) return;
+
+      locked = true;
+      slides[current].classList.remove('active');
+      current = next;
+      slides[current].scrollTop = 0;
+      slides[current].classList.add('active');
+      updateUI();
+
+      setTimeout(() => {
+        locked = false;
+        checkScrollHint();
+      }, 760);
+    }
+
+    function nextSlide() {
+      if (current === slides.length - 1) goTo(0);
+      else goTo(current + 1);
+    }
+
+    function prevSlide() {
+      if (current > 0) goTo(current - 1);
+    }
+
+    async function startMusic() {
+      try {
+        await bgMusic.play();
+        musicPlaying = true;
+        musicToggle.innerHTML = '<span class="music-wave flex items-center gap-[3px]"><span></span><span></span><span></span></span>';
+      } catch (error) {
+        musicPlaying = false;
+        musicToggle.textContent = '🔇';
+      }
+    }
+
+    function stopMusic() {
+      bgMusic.pause();
+      musicPlaying = false;
+      musicToggle.textContent = '🔇';
+    }
+
+    function closeMusicModal() {
+      musicModal.style.opacity = '0';
+      musicModal.style.pointerEvents = 'none';
+      setTimeout(() => {
+        musicModal.style.display = 'none';
+      }, 700);
+    }
+
+    playMusic.addEventListener('click', async () => {
+      await startMusic();
+      closeMusicModal();
+    });
+
+    skipMusic.addEventListener('click', () => {
+      stopMusic();
+      closeMusicModal();
+    });
+
+    musicToggle.addEventListener('click', async () => {
+      musicPlaying ? stopMusic() : await startMusic();
+    });
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    homeBtn.addEventListener('click', () => goTo(0));
+
+    document.querySelectorAll('.nextBtn').forEach(btn => btn.addEventListener('click', nextSlide));
+    document.querySelectorAll('.jumpBtn').forEach(btn => {
+      btn.addEventListener('click', () => goTo(Number(btn.dataset.target)));
+    });
+
+    slides.forEach(slide => {
+      slide.addEventListener('scroll', checkScrollHint, { passive: true });
+    });
+
+    window.addEventListener('resize', checkScrollHint);
+
+    window.addEventListener('keydown', event => {
+      const slide = activeSlide();
+      const canScroll = slide.scrollHeight > slide.clientHeight + 8;
+      const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 40;
+      const atTop = slide.scrollTop <= 10;
+
+      if (event.key === 'ArrowRight') nextSlide();
+      if (event.key === 'ArrowLeft') prevSlide();
+
+      if (event.key === 'ArrowDown') {
+        if (canScroll && !atBottom) slide.scrollBy({ top: Math.round(window.innerHeight * 0.72), behavior: 'smooth' });
+        else nextSlide();
+      }
+
+      if (event.key === 'ArrowUp') {
+        if (canScroll && !atTop) slide.scrollBy({ top: -Math.round(window.innerHeight * 0.72), behavior: 'smooth' });
+        else prevSlide();
+      }
+
+      if (event.key.toLowerCase() === 'm') musicToggle.click();
+    });
+
+    window.addEventListener('pointermove', event => {
+      if (!spotlight) return;
+      spotlight.style.left = `${event.clientX}px`;
+      spotlight.style.top = `${event.clientY}px`;
+    });
+
+    initSparkles();
+    initDots();
+    updateUI();
+    checkScrollHint();
+  </script>
+  <script>
+  const musicToggle = document.getElementById('musicToggle');
+  const bgMusic = document.getElementById('bgMusic');
+  const musicModal = document.getElementById('musicModal');
+  const playMusic = document.getElementById('playMusic');
+  const skipMusic = document.getElementById('skipMusic');
+
+  let musicPlaying = false;
+
+  function setMusicIcon(isPlaying) {
+    if (isPlaying) {
+      musicToggle.innerHTML = `
+        <span class="music-wave flex items-center gap-[3px]">
+          <span></span><span></span><span></span>
+        </span>
+      `;
+    } else {
+      musicToggle.textContent = '🔇';
+    }
+  }
+
+  async function startMusic() {
+    try {
+      await bgMusic.play();
+      musicPlaying = true;
+      setMusicIcon(true);
+    } catch (error) {
+      musicPlaying = false;
+      setMusicIcon(false);
+      console.log('Musik gagal diputar:', error);
+    }
+  }
+
+  function stopMusic() {
+    bgMusic.pause();
+    musicPlaying = false;
+    setMusicIcon(false);
+  }
+
+  function closeMusicModal() {
+    musicModal.style.opacity = '0';
+    musicModal.style.pointerEvents = 'none';
+
+    setTimeout(() => {
+      musicModal.style.display = 'none';
+    }, 700);
+  }
+
+  playMusic.addEventListener('click', async () => {
+    await startMusic();
+    closeMusicModal();
+  });
+
+  skipMusic.addEventListener('click', () => {
+    stopMusic();
+    closeMusicModal();
+  });
+
+  musicToggle.addEventListener('click', async () => {
+    if (bgMusic.paused) {
+      await startMusic();
+    } else {
+      stopMusic();
+    }
+  });
+
+  bgMusic.addEventListener('ended', () => {
+    musicPlaying = false;
+    setMusicIcon(false);
+  });
+</script>
+</body>
+</html>
